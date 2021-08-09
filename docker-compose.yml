@@ -1,0 +1,23 @@
+version: '3.7'
+networks:
+    app_net:
+        ipam: 
+            driver: default
+            config: 
+                - subnet: "192.168.111.0/24"
+
+services: 
+    app1:
+        image: nginx:alpine
+        networks: 
+            - app_net
+        ports: 
+            - 83:80
+    
+    app2:
+        image:  nginx:alpine
+        networks: 
+            app_net:
+                ipv4_address: 192.168.111.100
+        ports: 
+            - 81:80
